@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+int n13(int n){
+    int k = 0;
+    for (int i=2; i<n; i++){
+        if (n % i == 0) k++;
+    }
+    return k;
+}
+
+string n21(int n){
+    int k = 0;
+    while (n/10 > 0){
+        int a = n%10;
+        int b = (n/10)%10;
+        if (a <= b){
+            k = 1;
+            break;
+        }
+        n = n / 10;
+    }
+    if (k) return "не возрастает ";
+    else return "возрастает ";
+}
+
+string n22(string n){
+    int d = 0;
+    int o = 0;
+    int m = 0;
+    for (char s : n){
+        if (s == '!') break;
+        if (s == 'д' || s == 'Д') d++;
+        else if (s == 'о' || s == 'О') o++;
+        else if (s == 'м' || s == 'М') m++;
+    }
+    if (d > 0 && o > 0 && m > 0) return "можно";
+    else return "нельзя";
+    
+}
+
+int main() {
+    cout << "n13 " << n13(120) << endl;
+    cout << "n21 " << n21(35679) << endl;
+    cout << "n21 " << n21(35479) << endl;
+    cout << "n22 " << n22("шгврмапдлорв!") << endl;
+    cout << "n22 " << n22("шгврапдлорв!") << endl;
+
+    return 0;
+}
