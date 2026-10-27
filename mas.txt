@@ -1,0 +1,131 @@
+#include <iostream>
+#include <string>
+#include <clocale>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+void print(auto a){
+    cout<< a <<endl;
+}
+
+void z3(int arr1[], int n){
+    cout << "Задание 3\n";
+    int p;
+    cout << "Введите p (номер элемента): ";
+    cin >> p;
+    int j = 0;
+    for(int i = 0; i < n; i++){
+        if (arr1[i] == arr1[p-1]){
+            j++;
+        }
+    }
+    int arr2[j]; 
+    j = 0;
+    for(int i = 0; i < n; i++){
+        if (arr1[i] == arr1[p-1]){
+            arr2[j] = i + 1;
+            cout << arr2[j] << ' ';
+            j++;
+        }
+    }
+}
+
+void z4(int arr1[], int n){
+    cout << "Задание 4\n";
+    int j = 0;
+    for(int i = 0; i < n; i++){
+        if ((arr1[i] > 0) && (arr1[i] % 2 == 0)){
+            j++;
+        }
+    }
+    int arr2[j]; 
+    j = 0;
+    for(int i = 0; i < n; i++){
+        if ((arr1[i] > 0) && (arr1[i] % 2 == 0)){
+            arr2[j] = arr1[i];
+            cout << arr2[j] << ' ';
+            j++;
+        }
+    }
+}
+
+// 8. В одномерном массиве, состоящем из n вещественных элементов, вычислить:
+//      номер минимального элемента массива;
+//      сумму элементов массива, расположенных между первым и вторым отрицательными элементами.
+
+void zVect(int n){
+    print("задание Vectr");
+    vector<int> arr(n);
+    print("Введите массив: ");
+    for (int i = 0; i< n; i++){
+        cin>> arr[i];
+    }
+    int min = arr[0];
+    for (int i= 1;i< n; i++){
+        if (arr[i] < min){
+            min = arr[i];
+        }
+    }
+    cout<< "min = ";
+    print(min);
+    int i = 0, sum = 0;
+    int minus1 = -1, minus2;
+    for (int i = 0; i< n; i++){
+        if (arr[i] < 0){
+            minus1 = i;
+            break;
+        }
+    }
+    for (int i = minus1 + 1; i< n; i++){
+        if (arr[i] < 0){
+            minus2 = i;
+            break;
+        }
+    }
+    for (int i = minus1 + 1; i< minus2; i++){
+        sum = sum + arr[i];
+    }
+    cout<< "summa = ";
+    print(sum);
+
+//  Преобразовать массив таким образом, чтобы сначала располагались все
+//  элементы, модуль которых не превышает 1 , а потом — все остальные.
+
+    vector<int> ed;
+    vector<int> arr_cop = arr;
+    for (int i = 0; i< n; i++){
+        if (fabs(arr[i]) <= 1){
+            ed.push_back(i);
+        }
+    }
+    arr.clear();
+    for (int i = 0; i< ed.size(); i++){
+        arr.push_back(arr_cop[ed[i]]);
+    }
+    for (int i=  0; i< n; i++){
+        if (fabs(arr_cop[i]) > 1){
+            arr.push_back(arr_cop[i]);
+        }
+    }
+    for(int i=0;i<n;i++)
+        cout<<arr[i]<<" "; cout<<endl;
+}
+
+int main(){
+    cout << "Введите кол-во элементов массива: ";
+    int n;
+    cin >> n;
+    int arr[n];
+    cout << "Введите массив: ";
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+    cout << '\n';
+    z3(arr, n);
+    cout << '\n' << endl;
+    z4(arr, n);
+    cout << '\n';
+    zVect(n);
+    return 0;
+}
